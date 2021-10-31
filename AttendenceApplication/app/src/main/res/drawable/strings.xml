@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">AttendenceManager1</string>
+    <string name="password">Password</string>
+    <string name="staff_name"></string>
+    <string name="create_staff_id">Create Staff ID</string>
+    <string name="email_id">Email ID</string>
+    <string name="college_name">College Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="registration">Registration</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account_login">Already have an account? <b>Login</b></string>
+    <string name="don_t_have_an_account_register">Don’t have an account ? <b>Register</b></string>
+    <string-array name="colleges">
+        <item>Dr.N.G.P Institute of Technology</item>
+        <item>PSG College of Technology</item>
+        <item>Coimbatore Institute of Technology</item>
+        <item>Kumaraguru College of Technology</item>
+        <item>Amrita Vishwa Vidyapeetham</item>
+        <item>Sri Krishna College of Engineering and Technolgy</item>
+        <item>Karunya University</item>
+        <item>Government College of Technology</item>
+        <item>Sri RamaKrishna Engineering College</item>
+        <item>KPR Institute of Technology</item>
+        <item>Karpagam College of Engineering</item>
+        <item>Kalaignar Karunanidhi Institute of Technology</item>
+    </string-array>
+    <string-array name="departmentnames">
+        <item>CSE</item>
+        <item>EEE</item>
+        <item>IT</item>
+        <item>ECE</item>
+        <item>MECH</item>
+    </string-array>
+    <string-array name="batch">
+        <item>2017-2021</item>
+        <item>2018-2022</item>
+        <item>2019-2023</item>
+        <item>2020-2024</item>
+        <item>2021-2025</item>
+        <item>2022-2026</item>
+        <item>2023-2027</item>
+        <item>2024-2028</item>
+        <item>2025-2029</item>
+        <item>2026-2030</item>
+        <item>2027-2031</item>
+        <item>2028-2032</item>
+        <item>2029-2033</item>
+        <item>2030-2034</item>
+        <item>2031-2035</item>
+        <item>2032-2036</item>
+        <item>2033-2037</item>
+        <item>2034-2038</item>
+        <item>2035-2039</item>
+        <item>2036-2040</item>
+        <item>2037-2041</item>
+        <item>2038-2042</item>
+    </string-array>
+    <string-array name="currentYear">
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+        <item>2028</item>
+        <item>2029</item>
+        <item>2030</item>
+        <item>2031</item>
+        <item>2032</item>
+        <item>2033</item>
+        <item>2034</item>
+        <item>2035</item>
+        <item>2036</item>
+        <item>2037</item>
+        <item>2038</item>
+        <item>2039</item>
+        <item>2040</item>
+        <item>2041</item>
+        <item>2042</item>
+    </string-array>
+    <string-array name="currentSemester">
+        <item>Ⅰ</item>
+        <item>Ⅱ</item>
+        <item>Ⅲ</item>
+        <item>Ⅳ</item>
+        <item>Ⅴ</item>
+        <item>Ⅵ</item>
+        <item>Ⅶ</item>
+        <item>Ⅷ</item>
+    </string-array>
+</resources>

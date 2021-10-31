@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2"
+    tools:context=".register">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="2dp"
+        android:layout_weight="1.90"
+        android:background="@drawable/regbg"
+        android:orientation="vertical"
+        android:weightSum="8">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0.7"
+            android:fontFamily="@font/berlinsansfbregular"
+            android:gravity="center"
+            android:text="Registration"
+            android:textColor="@color/white"
+            android:textSize="34sp">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5.7"
+            android:orientation="vertical"
+            android:weightSum="6">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5"
+                android:gravity="center"
+                android:orientation="vertical">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/staffid"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="38dp"
+                    android:layout_marginRight="38dp"
+                    android:fontFamily="@font/futuramediumbt"
+                    android:hint="Staff ID"
+                    android:textColorHint="@color/white"
+                    app:boxCornerRadiusBottomEnd="25dp"
+                    app:boxCornerRadiusBottomStart="25dp"
+                    app:boxCornerRadiusTopEnd="25dp"
+                    app:boxCornerRadiusTopStart="0dp"
+                    app:boxStrokeColor="@color/white"
+                    app:counterMaxLength="12"
+                    app:hintTextColor="@color/white">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/regStaffID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/login_staff_id_icon"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/futuramediumbt"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:textColor="@color/white"
+                        android:textCursorDrawable="@null"
+                        android:textSize="16sp"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/EmailId"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="38dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="38dp"
+                    android:fontFamily="@font/futuramediumbt"
+                    android:hint="Email ID"
+                    android:textColorHint="@color/white"
+                    android:textSize="16sp"
+                    app:boxCornerRadiusBottomEnd="25dp"
+                    app:boxCornerRadiusBottomStart="25dp"
+                    app:boxCornerRadiusTopEnd="25dp"
+                    app:boxCornerRadiusTopStart="0dp"
+                    app:boxStrokeColor="@color/white"
+                    app:counterMaxLength="20"
+                    app:hintTextColor="@color/white">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/regEmailId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/emailicon"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/futuramediumbt"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:textColor="@color/white"
+                        android:textCursorDrawable="@null"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/collegeName"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="38dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="38dp"
+                    app:counterMaxLength="30"
+                    android:layout_marginBottom="5dp"
+                    android:hint="College Name"
+                    app:endIconMode="dropdown_menu"
+                    app:endIconTint="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="16sp"
+                    app:boxCornerRadiusBottomEnd="25dp"
+                    app:boxCornerRadiusBottomStart="25dp"
+                    app:boxCornerRadiusTopEnd="25dp"
+                    app:boxCornerRadiusTopStart="0dp"
+                    app:endIconDrawable="@drawable/drpdownvector"
+                    app:boxStrokeColor="@color/white"
+                    app:hintTextColor="@color/white">
+
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autocomplteText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:completionThreshold="1"
+                        android:drawableStart="@drawable/collegeicon"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/futuramediumbt"
+                        android:maxLines="1"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="40dp"
+                        android:textColor="@color/white"
+                        android:textCursorDrawable="@null"
+                        android:textSize="15sp"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="50dp"
+                android:visibility="gone"
+                android:progressDrawable="@drawable/custom_progressbar"
+                android:layout_marginRight="50dp"
+                android:layout_weight="0.1" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="38dp"
+                    android:layout_marginRight="38dp"
+                    android:fontFamily="@font/futuramediumbt"
+                    android:hint="Password"
+                    android:textColorHint="@color/white"
+                    android:textSize="16sp"
+                    app:boxCornerRadiusBottomEnd="25dp"
+                    app:boxCornerRadiusBottomStart="25dp"
+                    app:boxCornerRadiusTopEnd="25dp"
+                    app:boxCornerRadiusTopStart="0dp"
+                    app:boxStrokeColor="@color/white"
+                    app:endIconMode="password_toggle"
+                    app:hintTextColor="@color/white"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/createpassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/login_password_icon"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/futuramediumbt"
+                        android:inputType="textPassword"
+                        android:maxLines="2"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="40dp"
+                        android:textColor="@color/white"
+                        android:textCursorDrawable="@null"
+                        android:textSize="16sp"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cretepassword"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="38dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="38dp"
+                    android:fontFamily="@font/futuramediumbt"
+                    android:hint="Confirm Password"
+                    android:textColorHint="@color/white"
+                    android:textSize="16sp"
+                    app:boxCornerRadiusBottomEnd="25dp"
+                    app:boxCornerRadiusBottomStart="25dp"
+                    app:boxCornerRadiusTopEnd="25dp"
+                    app:boxCornerRadiusTopStart="0dp"
+                    app:boxStrokeColor="@color/white"
+                    app:endIconMode="password_toggle"
+                    app:hintTextColor="@color/white"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/confirmcreatepassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/login_password_icon"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/futuramediumbt"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="40dp"
+                        android:textColor="@color/white"
+                        android:textCursorDrawable="@null"
+                        android:textSize="16sp"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/registerbutton"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="120dp"
+                android:layout_marginBottom="0dp"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/berlinsansfbregular"
+                android:text="Register"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:cornerRadius="25dp">
+
+            </com.google.android.material.button.MaterialButton>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="0.10"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/regloginbtn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/futuramediumbt"
+            android:gravity="center"
+            android:text="@string/already_have_an_account_login"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            tools:ignore="TouchTargetSizeCheck">
+
+        </TextView>
+
+    </LinearLayout>
+
+</LinearLayout>

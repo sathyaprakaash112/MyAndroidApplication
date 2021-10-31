@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:padding="20dp"
+    android:background="@drawable/tab2"
+    >
+
+    <ImageView
+
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/icons"/>
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/staffnameheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:text="Hello!"
+        android:textColor="@color/black"
+        android:textSize="27sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Attendance Manager"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:fontFamily="@font/berlinsansfbregular"
+        />
+
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="8"
+    android:layout_margin="15dp"
+    android:background="@drawable/regbg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:weightSum="8"
+        android:layout_marginStart="15dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/existingpagebg"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:weightSum="2.5"
+            android:layout_weight="2">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/create"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.9"
+                android:layout_marginRight="60dp"
+                android:textSize="18sp"
+                app:cornerRadius="30dp"
+                android:fontFamily="@font/berlinsansfbregular"
+                android:layout_marginLeft="60dp"
+                app:backgroundTint="@color/white"
+                android:text="CREATE CLASS"
+                android:textColor="@color/black"
+                >
+
+            </com.google.android.material.button.MaterialButton>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/existing"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.9"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="60dp"
+                android:textSize="18sp"
+                app:cornerRadius="30dp"
+                android:fontFamily="@font/berlinsansfbregular"
+                android:layout_marginLeft="60dp"
+                app:backgroundTint="@color/white"
+                android:text="EXISTING CLASS"
+                android:textColor="@color/black"
+                >
+
+            </com.google.android.material.button.MaterialButton>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

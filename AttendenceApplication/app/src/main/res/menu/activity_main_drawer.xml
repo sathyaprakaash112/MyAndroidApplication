@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/createclass"
+            android:icon="@drawable/ic_baseline_group_add_24"
+            android:title="Create Class" />
+        <item
+            android:id="@+id/forgotpassword"
+            android:icon="@drawable/ic_baseline_vpn_key_24"
+            android:title="Forgot Password?" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_baseline_reply_24"
+            android:title="Log Out" />
+        <item
+            android:id="@+id/addstud"
+            android:icon="@drawable/usericon"
+            android:title="Add Students" />
+    </group>
+
+</menu>
