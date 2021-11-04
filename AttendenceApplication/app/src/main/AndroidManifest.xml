@@ -3,7 +3,7 @@
     package="com.example.attendenceapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AttendenceApplication">
+        <activity
+            android:name=".Notified"
+            android:exported="true" />
+        <activity
+            android:name=".ui.login.ParentsNotifiedSuccessfully"
+            android:exported="true"
+            android:label="@string/title_activity_parents_notified_successfully" />
         <activity
             android:name=".Add_students_intro"
             android:exported="true" />

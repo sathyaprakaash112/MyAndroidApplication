@@ -136,7 +136,8 @@ public class AttendancePage extends AppCompatActivity implements QuantityListene
                     }
                 }else{
                     ActivityCompat.requestPermissions(AttendancePage.this,new String[]{Manifest.permission.SEND_SMS},100);
-                }
+               }
+                startActivity(new Intent(getApplicationContext(),Notified.class));
             }
 
         });
