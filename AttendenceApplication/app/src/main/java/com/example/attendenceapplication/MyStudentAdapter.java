@@ -1,5 +1,6 @@
 package com.example.attendenceapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -23,16 +24,18 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
-public class MyStudentAdapter extends RecyclerView.Adapter<MyStudentAdapter.MyViewHolder> {
+public class MyStudentAdapter extends RecyclerView.Adapter<MyStudentAdapter.MyViewHolder> implements QuantityListener  {
 
 
     Context context;
     ArrayList<Student> studentArrayList;
     String present,absent;
-
-    public MyStudentAdapter(Context context, ArrayList<Student> studentArrayList) {
+    ArrayList<Student> positions = new ArrayList<>();
+    QuantityListener quantityListener;
+    public MyStudentAdapter(Context context, ArrayList<Student> studentArrayList,QuantityListener quantityListener) {
         this.context = context;
         this.studentArrayList = studentArrayList;
+        this.quantityListener = quantityListener;
     }
 
     @NonNull
@@ -47,27 +50,20 @@ public class MyStudentAdapter extends RecyclerView.Adapter<MyStudentAdapter.MyVi
 
 
     @Override
-    public void onBindViewHolder(@NonNull MyStudentAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyStudentAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Student student = studentArrayList.get(position);
-        holder.presentbox.setOnCheckedChangeListener(null);
-        holder.absentbox.setOnCheckedChangeListener(null);
+//        holder.presentbox.setOnCheckedChangeListener(null);
+//        holder.absentbox.setOnCheckedChangeListener(null);
 
         holder.registernumber.setText(student.registernumber);
 
 
         getPresentAbsent();
-
-        if(true){
-            holder.presentbox.setChecked(true);
-        }
-        else if(false){
-            holder.absentbox.setChecked(false);
-        }
         holder.presentbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 final boolean isChecked = holder.presentbox.isChecked();
-                if(isChecked == true){
+                if (isChecked) {
                     holder.absentbox.setChecked(false);
                 }
 
@@ -78,18 +74,32 @@ public class MyStudentAdapter extends RecyclerView.Adapter<MyStudentAdapter.MyVi
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 final boolean isChecked = holder.absentbox.isChecked();
-                if(isChecked == true){
+                if (isChecked == true) {
                     holder.presentbox.setChecked(false);
                 }
-
             }
         });
-
+        holder.absentbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(holder.absentbox.isChecked()){
+                    positions.add(studentArrayList.get(position));
+                }else{
+                    positions.remove(studentArrayList.get(position));
+                }
+                quantityListener.onQuantityChange(positions);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return studentArrayList.size();
+    }
+
+    @Override
+    public void onQuantityChange(ArrayList<Student> arrayList) {
+
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
