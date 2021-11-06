@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.AdapterListUpdateCallback;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,18 +23,18 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
-public class MyStudentAdapter extends RecyclerView.Adapter<MyStudentAdapter.MyViewHolder> implements QuantityListener  {
+public class MyStudentAdapter extends RecyclerView.Adapter<MyStudentAdapter.MyViewHolder> implements AbsenteesListener {
 
 
     Context context;
     ArrayList<Student> studentArrayList;
-    String present,absent;
+//    String present,absent;
     ArrayList<Student> positions = new ArrayList<>();
-    QuantityListener quantityListener;
-    public MyStudentAdapter(Context context, ArrayList<Student> studentArrayList,QuantityListener quantityListener) {
+    AbsenteesListener absenteesListener;
+    public MyStudentAdapter(Context context, ArrayList<Student> studentArrayList, AbsenteesListener absenteesListener) {
         this.context = context;
         this.studentArrayList = studentArrayList;
-        this.quantityListener = quantityListener;
+        this.absenteesListener = absenteesListener;
     }
 
     @NonNull
@@ -44,7 +43,6 @@ public class MyStudentAdapter extends RecyclerView.Adapter<MyStudentAdapter.MyVi
 
         View v = LayoutInflater.from(context).inflate(R.layout.studentitem,parent,false);
 
-
         return new MyViewHolder(v);
     }
 
@@ -52,33 +50,39 @@ public class MyStudentAdapter extends RecyclerView.Adapter<MyStudentAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyStudentAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Student student = studentArrayList.get(position);
-//        holder.presentbox.setOnCheckedChangeListener(null);
-//        holder.absentbox.setOnCheckedChangeListener(null);
+        holder.presentbox.setOnCheckedChangeListener(null);
+        holder.absentbox.setOnCheckedChangeListener(null);
 
         holder.registernumber.setText(student.registernumber);
 
+        holder.presentbox.setChecked(true);
 
-        getPresentAbsent();
+        //getPresentAbsent();
+
         holder.presentbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 final boolean isChecked = holder.presentbox.isChecked();
                 if (isChecked) {
                     holder.absentbox.setChecked(false);
+                }else{
+                    holder.absentbox.setChecked(true);
                 }
-
             }
         });
 
-        holder.absentbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.absentbox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                final boolean isChecked = holder.absentbox.isChecked();
-                if (isChecked == true) {
+            public void onClick(View view) {
+                if(holder.absentbox.isChecked()){
                     holder.presentbox.setChecked(false);
+                }else{
+                    holder.presentbox.setChecked(true);
                 }
             }
         });
+
+
         holder.absentbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -87,7 +91,7 @@ public class MyStudentAdapter extends RecyclerView.Adapter<MyStudentAdapter.MyVi
                 }else{
                     positions.remove(studentArrayList.get(position));
                 }
-                quantityListener.onQuantityChange(positions);
+                absenteesListener.onQuantityChange(positions);
             }
         });
     }
@@ -115,20 +119,21 @@ public class MyStudentAdapter extends RecyclerView.Adapter<MyStudentAdapter.MyVi
             absentbox = itemView.findViewById(R.id.absentcheckbox);
         }
     }
-    private void getPresentAbsent(){
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-        String registernumber = prefs.getString("registernumber", "no_id");
-        FirebaseFirestore fstore = FirebaseFirestore.getInstance();
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        SharedPreferences preffs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-        String data = preffs.getString("message2", "no_id");
-        fstore.collection("users").document(uid).collection("classes").document("EEE2019-2023Third YearⅠEEE").collection("Students").document("710719105032").addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                present = value.getString("present");
-                absent = value.getString("absent");
-            }
-        });
-    }
+//    private void getPresentAbsent(){
+//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+//        String registernumber = prefs.getString("registernumber", "no_id");
+//        FirebaseFirestore fstore = FirebaseFirestore.getInstance();
+//        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//
+//        SharedPreferences preffs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+//        String data = preffs.getString("message2", "no_id");
+//
+//        fstore.collection("users").document(uid).collection("classes").document("EEE2019-2023Third YearⅠEEE").collection("Students").document("710719105032").addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+//                present = value.getString("present");
+//                absent = value.getString("absent");
+//            }
+//        });
+//    }
 }

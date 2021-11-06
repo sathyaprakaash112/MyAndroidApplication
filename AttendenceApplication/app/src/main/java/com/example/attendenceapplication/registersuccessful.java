@@ -23,7 +23,7 @@ public class registersuccessful extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent1 = new Intent(getApplicationContext(), login.class);
+                    Intent intent1 = new Intent(getApplicationContext(), classIntro.class);
                     startActivity(intent1, ActivityOptions.makeSceneTransitionAnimation(registersuccessful.this).toBundle());
                 }
         });

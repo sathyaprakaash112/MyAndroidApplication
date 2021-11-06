@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -26,25 +27,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class AttendancePage extends AppCompatActivity implements QuantityListener{
+public class AttendancePage extends AppCompatActivity implements AbsenteesListener {
     RecyclerView recyclerView;
     ArrayList<Student> studentArrayList;
     FirebaseFirestore fstore;
@@ -59,7 +62,8 @@ public class AttendancePage extends AppCompatActivity implements QuantityListene
     Menu menu;
     private CheckBox absentcheckbox1, presentcheckbox1;
     DrawerLayout drawerLayout;
-    ArrayList<String> absenteesPhoneNumbers,absentees;
+    ArrayList<String> absenteesPhoneNumbers;
+    ArrayList<Student> absentees;
     HashMap<String,String> absenteesDetails;
 
 
@@ -105,6 +109,7 @@ public class AttendancePage extends AppCompatActivity implements QuantityListene
         fstore = FirebaseFirestore.getInstance();
 
 
+        absentees = new ArrayList<>();
         absenteesDetails = new HashMap<>();
         studentArrayList = new ArrayList<Student>();
         myStudentAdapter = new MyStudentAdapter(AttendancePage.this, studentArrayList,this);
@@ -126,18 +131,27 @@ public class AttendancePage extends AppCompatActivity implements QuantityListene
         proceedbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(absentees.isEmpty()){
+                    Toast.makeText(AttendancePage.this, "Bravo! No absentees.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
+                }
 
-                if (ContextCompat.checkSelfPermission(AttendancePage.this, Manifest.permission.SEND_SMS)
-                        == PackageManager.PERMISSION_GRANTED) {
+                else if(!absentees.isEmpty() && (ContextCompat.checkSelfPermission(AttendancePage.this, Manifest.permission.SEND_SMS)
+                        == PackageManager.PERMISSION_GRANTED)) {
                         //when permission is granted send message.
                     Set<Map.Entry<String,String>> me = absenteesDetails.entrySet();
                     for(Map.Entry s : me){
                         sendMessage(s.getKey().toString(),s.getValue().toString());
+                        //sendMessageTextLocal(s.getKey().toString(),s.getValue().toString());
+                        Toast.makeText(getApplicationContext(), "Parents notified successfully!", Toast.LENGTH_SHORT).show();
+
                     }
+                    startActivity(new Intent(getApplicationContext(),Notified.class));
                 }else{
                     ActivityCompat.requestPermissions(AttendancePage.this,new String[]{Manifest.permission.SEND_SMS},100);
                }
-                startActivity(new Intent(getApplicationContext(),Notified.class));
+
             }
 
         });
@@ -162,11 +176,48 @@ public class AttendancePage extends AppCompatActivity implements QuantityListene
         if(!message.equals("") && !phoneNo.equals("")){
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo,null,message,null,null);
+
+        }else{
+            Toast.makeText(getApplicationContext(), "Phone number not available. Task failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void sendMessageTextLocal(String studentName,String phoneNo) {
+        String message2 = "Your ward " + studentName + " is absent for the class.";
+        phoneNo = "91" + phoneNo;
+        if(!message2.equals("") && !phoneNo.equals("")){
+            try {
+                // Construct data
+                String apiKey = "apikey=" + "NjU1Nzc3Njk0YjMwNzg0ODc4NzA1YTY4NmQzNTRkMzM=";
+                String message = "&message=" + "This is your message";
+                String sender = "&sender=" + "TXTLCL";
+                String numbers = "&numbers=" + phoneNo;
+
+                // Send data
+                HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
+                String data = apiKey + numbers + message + sender;
+                conn.setDoOutput(true);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+                conn.getOutputStream().write(data.getBytes("UTF-8"));
+                final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                final StringBuffer stringBuffer = new StringBuffer();
+                String line;
+                while ((line = rd.readLine()) != null) {
+                    stringBuffer.append(line);
+                }
+                rd.close();
+            } catch (Exception e) {
+                System.out.println("Error SMS "+e);
+            }
+            StrictMode.ThreadPolicy st = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(st);
             Toast.makeText(getApplicationContext(), "Parents notified successfully", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(getApplicationContext(), "Phone number not available. Task failed", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -174,17 +225,14 @@ public class AttendancePage extends AppCompatActivity implements QuantityListene
         if(requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Set<Map.Entry<String,String>> me = absenteesDetails.entrySet();
             for(Map.Entry s : me){
-                sendMessage(s.getKey().toString(),s.getValue().toString());
+                sendMessageTextLocal(s.getKey().toString(),s.getValue().toString());
             }
         }else{
             Toast.makeText(getApplicationContext(), "Permission denied!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private static String getMessage(String s) {
-        String  message = "Your ward " + s + " is absent for the class.";
-        return message;
-    }
+
 
 
     private void changeListener() {
@@ -257,11 +305,11 @@ public class AttendancePage extends AppCompatActivity implements QuantityListene
 
     @Override
     public void onQuantityChange(ArrayList<Student> arrayList) {
-        Toast.makeText( this, arrayList.toString(), Toast.LENGTH_SHORT).show();
+        absentees.clear();
+        absentees.addAll(arrayList);
         for(Student s :arrayList){
             System.out.println(s.phoneNo);
-//            absentees.add(s.studentName);
-//            absenteesPhoneNumbers.add(s.phoneNo);
+
             absenteesDetails.put(s.studentName,s.phoneNo);
 
         }

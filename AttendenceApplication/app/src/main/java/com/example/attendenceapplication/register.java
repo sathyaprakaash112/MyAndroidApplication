@@ -154,21 +154,12 @@ public class register extends AppCompatActivity {
                     createpassword.requestFocus();
                     return;
                 }
-//                else {
-//                Toast.makeText(getApplicationContext(), "Register Success", Toast.LENGTH_LONG).show();
-//
-//                }
+
 
 
                 //pushing the data into the firebase database
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("users");
-
-
-
-
-
-
 
 
 

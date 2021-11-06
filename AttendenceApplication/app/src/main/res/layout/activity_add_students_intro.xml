@@ -7,7 +7,6 @@
     tools:context=".Add_students_intro"
     android:orientation="vertical"
     android:weightSum="5"
-    android:background="@drawable/addstudentbg"
 
 
     >
@@ -24,6 +23,7 @@
 
         >
         <Button
+            android:id="@+id/createsheetbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CREATE SHEET"
@@ -33,6 +33,7 @@
 
         </Button>
         <Button
+            android:id="@+id/importsheetbtn"
             android:layout_marginTop="20dp"
             android:textSize="23sp"
             android:layout_width="wrap_content"

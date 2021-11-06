@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
@@ -59,20 +60,17 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
-        drawerLayout=findViewById(R.id.drawer_layout);
-        navigationView=findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
         textView = findViewById(id.staffnameheader);
 
-        toolbar=findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
 
 
         progressDialog = new ProgressDialog(this);
@@ -87,9 +85,8 @@ public class MainActivity extends AppCompatActivity {
         fstore = FirebaseFirestore.getInstance();
 
 
-
         classesArrayList = new ArrayList<Classes>();
-        myAdapter = new MyAdapter(MainActivity.this,classesArrayList);
+        myAdapter = new MyAdapter(MainActivity.this, classesArrayList);
 
         recyclerView.setAdapter(myAdapter);
 
@@ -97,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         navigationView.bringToFront();
-        ActionBarDrawerToggle toggle=new
-                ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new
+                ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
@@ -112,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(),login.class);
+                Intent intent = new Intent(getApplicationContext(), login.class);
                 startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
             }
         });
@@ -123,46 +120,51 @@ public class MainActivity extends AppCompatActivity {
         String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         fstore.collection("users").document(userid).collection("classes").orderBy("departmentName", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
-                if(error != null){
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
+                        if (error != null) {
+                            if (progressDialog.isShowing()) {
+                                progressDialog.dismiss();
+                            }
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+
+                            if (dc.getType() == DocumentChange.Type.ADDED) {
+
+                                classesArrayList.add(dc.getDocument().toObject(Classes.class));
+
+                            }
+
+                            myAdapter.notifyDataSetChanged();
+                            if (progressDialog.isShowing()) {
+                                progressDialog.dismiss();
+                            }
+
+                        }
+                        if (classesArrayList.size() == 0) {
+                            if (progressDialog.isShowing()) {
+                                progressDialog.dismiss();
+                            }
+                        }
+
+
                     }
-                    Log.e("Firestore error",error.getMessage());
-                    return;
-                }
-
-                for(DocumentChange dc : value.getDocumentChanges()){
-
-                    if(dc.getType() == DocumentChange.Type.ADDED){
-
-                        classesArrayList.add(dc.getDocument().toObject(Classes.class));
-
-                    }
-
-                    myAdapter.notifyDataSetChanged();
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                    }
-
-                }
-
-
-            }
-        });
+                });
     }
 
 
-    public void onBackPressed(){
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else
-        {super.onBackPressed();
+        } else {
+            super.onBackPressed();
         }
     }
+
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case id.createclass:
@@ -174,17 +176,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
                 break;
 
-            case R.id.logout: menu.findItem(R.id.logout);
+            case id.logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent2 = new Intent(getApplicationContext(),login.class);
-                startActivity(intent2, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                Intent intent2 = new Intent(getApplicationContext(), login.class);
+                startActivity(intent2);
                 break;
             case id.addstud:
-                Intent intent3 = new Intent(MainActivity.this, AddStudent.class);
+                Toast.makeText(getApplicationContext(), "Please select the class and add students", Toast.LENGTH_SHORT).show();
+                Intent intent3 = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent3);
                 break;
 
         }
-        drawerLayout.closeDrawer(GravityCompat.START); return true;
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

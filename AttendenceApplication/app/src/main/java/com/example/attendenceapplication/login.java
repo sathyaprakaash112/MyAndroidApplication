@@ -89,7 +89,7 @@ public class login extends AppCompatActivity {
                     public void onSuccess(AuthResult authResult) {
 //                        progressBar.setVisibility(View.VISIBLE);
                         //login success action
-                        Toast.makeText(login.this, "Login Success", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(login.this, "Login Success", Toast.LENGTH_SHORT).show();
                         Intent intent2 = new Intent(getApplicationContext(), classIntro.class);
                         startActivity(intent2,ActivityOptions.makeSceneTransitionAnimation(login.this).toBundle());
 //                        progressBar.setVisibility(View.GONE);
@@ -148,7 +148,7 @@ public class login extends AppCompatActivity {
         if (FirebaseAuth.getInstance().getCurrentUser() != null && First.equals("Yes")) {
 //            progressBar.setVisibility(View.VISIBLE);
 
-            Intent intent1 = new Intent(getApplicationContext(), classIntro.class);
+            Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent1, ActivityOptions.makeSceneTransitionAnimation(login.this).toBundle());
             finish();
         }
