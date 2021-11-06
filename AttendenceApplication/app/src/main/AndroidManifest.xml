@@ -20,9 +20,6 @@
             android:exported="true"
             android:label="@string/title_activity_parents_notified_successfully" />
         <activity
-            android:name=".Add_students_intro"
-            android:exported="true" />
-        <activity
             android:name=".AttendancePage"
             android:exported="true" />
         <activity

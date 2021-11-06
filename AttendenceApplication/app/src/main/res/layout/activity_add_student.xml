@@ -149,7 +149,7 @@
                     android:id="@+id/phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/phonestudent"
+                    android:drawableStart="@drawable/regno"
                     android:drawablePadding="15dp"
                     android:fontFamily="@font/futuramediumbt"
                     android:inputType="phone"
