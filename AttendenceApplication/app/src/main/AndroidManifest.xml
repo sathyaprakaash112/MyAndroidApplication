@@ -15,10 +15,7 @@
         <activity
             android:name=".Notified"
             android:exported="true" />
-        <activity
-            android:name=".ui.login.ParentsNotifiedSuccessfully"
-            android:exported="true"
-            android:label="@string/title_activity_parents_notified_successfully" />
+
         <activity
             android:name=".AttendancePage"
             android:exported="true" />
@@ -46,11 +43,7 @@
         <activity
             android:name=".SplashScreen"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

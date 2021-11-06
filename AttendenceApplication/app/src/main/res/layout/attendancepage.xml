@@ -14,78 +14,82 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view1"
-        android:layout_gravity="start"
-        android:layout_height="match_parent"
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
         app:headerLayout="@layout/header"
         app:menu="@menu/activity_main_drawer" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AttendancePage"
-    android:orientation="vertical">
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="650dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".AttendancePage">
 
 
 
-        <include
-            android:id="@+id/toolbar21"
-            layout="@layout/toolbar2"
-            >
-
-        </include>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content" />
+            android:layout_height="650dp"
+            android:orientation="vertical">
 
 
 
+            <include
+                android:id="@+id/toolbar21"
+                layout="@layout/toolbar2"
+                >
+
+            </include>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            >
+            <Button
+                android:id="@+id/proceedbtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2.5"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/btnshape"
+                android:fontFamily="@font/futuramediumbt"
+                android:text="notify parent's"
+                android:layout_margin="10dp"
+                android:textSize="18sp">
+            </Button>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addstudent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:foreground="@drawable/add_person"
+                android:foregroundTint="@color/white"
+                android:backgroundTint="@color/liteBlue"
+                android:foregroundGravity="center"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/btnshape"
+                android:fontFamily="@font/futuramediumbt"
+                android:textSize="25sp">
+            </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+        </LinearLayout>
 
 
     </LinearLayout>
-<LinearLayout
-    android:layout_marginTop="10dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:weightSum="4"
-    >
-    <Button
-        android:id="@+id/proceedbtn"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_gravity="left"
-        android:background="@drawable/btnshape"
-        android:layout_width="wrap_content"
-        android:text="Proceed"
-        android:fontFamily="@font/futuramediumbt"
-        android:textSize="18sp"
-        android:layout_marginBottom="5dp">
-    </Button>
-    <Button
-        android:id="@+id/addstudent"
-        android:layout_height="50dp"
-        android:layout_gravity="right"
-        android:layout_marginStart="185dp"
-        android:background="@drawable/btnshape"
-        android:layout_width="50dp"
-        android:text="+"
-        android:fontFamily="@font/futuramediumbt"
-        android:textSize="25sp"
-        android:layout_marginBottom="5dp">
-    </Button>
-
-</LinearLayout>
-
-
-</LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

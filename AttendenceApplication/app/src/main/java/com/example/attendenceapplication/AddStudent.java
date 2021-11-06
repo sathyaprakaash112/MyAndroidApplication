@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.datepicker.MaterialTextInputPicker;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,7 +29,7 @@ public class AddStudent extends AppCompatActivity {
     String mymessage;
     Button next,back,finish;
     FirebaseFirestore firestore;
-    EditText studentName,regNo,phoneNo;
+    TextInputEditText studentName,regNo,phoneNo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +68,44 @@ public class AddStudent extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
 
 
+
+
             @Override
             public void onClick(View view) {
+                String noWhiteSpace = "[a-zA-Z][a-zA-Z ]*";
+                String name = studentName.getText().toString();
+                String reg = regNo.getText().toString();
+                String phone = phoneNo.getText().toString();
+                if (name.isEmpty()){
+                    studentName.setError("Name required!");
+                    studentName.requestFocus();
+                    return;
+                }
+                else if (!name.matches(noWhiteSpace)) {
+                    studentName.setError("Student name must contain 3 to 20 characters without any Special Characters");
+                    studentName.requestFocus();
+                    return;
+                }
+                if(reg.isEmpty()){
+                    regNo.setError("Register number required");
+                    regNo.requestFocus();
+                    return;
+                }
+                else if(!reg.matches("^[0-9]*$")){
+                    regNo.setError("Register numbers must contain only numbers");
+                    regNo.requestFocus();
+                    return;
+                }
+                if(phone.isEmpty()){
+                    phoneNo.setError("Phone number is required");
+                    phoneNo.requestFocus();
+                    return;
+                }
+                else if(!phone.matches("[0-9]{10}")){
+                    phoneNo.setError("Phone number must contain only 10 digits");
+                    phoneNo.requestFocus();
+                    return;
+                }
 
                 String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 HashMap<String,String> hm = new HashMap<>();
@@ -95,8 +133,44 @@ public class AddStudent extends AppCompatActivity {
             }
         });
         finish.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                String noWhiteSpace = "[a-zA-Z][a-zA-Z ]*";
+                String name = studentName.getText().toString();
+                String reg = regNo.getText().toString();
+                String phone = phoneNo.getText().toString();
+                if (name.isEmpty()){
+                    studentName.setError("Name required!");
+                    studentName.requestFocus();
+                    return;
+                }
+                if (!name.matches(noWhiteSpace)) {
+                    studentName.setError("Student name must contain 3 to 20 characters without any Special Characters");
+                    studentName.requestFocus();
+                    return;
+                }
+                if(reg.isEmpty()){
+                    regNo.setError("Register number required");
+                    regNo.requestFocus();
+                    return;
+                }
+                if(!reg.matches("^[0-9]*$")){
+                    regNo.setError("Register numbers must contain only numbers");
+                    regNo.requestFocus();
+                    return;
+                }
+                if(phone.isEmpty()){
+                    phoneNo.setError("Phone number is required");
+                    phoneNo.requestFocus();
+                    return;
+                }
+                if(!phone.matches("[0-9]{10}")){
+                    phoneNo.setError("Phone number must contain only 10 digits");
+                    phoneNo.requestFocus();
+                    return;
+                }
+
                 String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 HashMap<String,String> hm = new HashMap<>();
                 hm.put("studentName",studentName.getText().toString());
@@ -129,5 +203,42 @@ public class AddStudent extends AppCompatActivity {
                 moveTaskToBack(true);
             }
         });
+    }
+
+    public void validator() {
+        String noWhiteSpace = "\\A\\w{3,20}\\z";
+        String name = studentName.getText().toString();
+        String reg = regNo.getText().toString();
+        String phone = phoneNo.getText().toString();
+        if (name.isEmpty()){
+            studentName.setError("Name required!");
+            studentName.requestFocus();
+            return;
+        }
+        if (!name.matches(noWhiteSpace)) {
+            studentName.setError("Student name must contain 3 to 20 characters without any Special Characters");
+            studentName.requestFocus();
+            return;
+        }
+        if(reg.isEmpty()){
+            regNo.setError("Register number required");
+            regNo.requestFocus();
+            return;
+        }
+        if(!reg.matches("[\\p{Digit}]")){
+            regNo.setError("Register numbers must contain only numbers");
+            regNo.requestFocus();
+            return;
+        }
+        if(phone.isEmpty()){
+            phoneNo.setError("Phone number is required");
+            phoneNo.requestFocus();
+            return;
+        }
+        if(!phone.matches("[0-9]{10}")){
+            phoneNo.setError("Phone number must contain only 10 digits");
+            phoneNo.requestFocus();
+            return;
+        }
     }
 }

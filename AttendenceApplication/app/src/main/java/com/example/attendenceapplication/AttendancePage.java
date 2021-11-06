@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -51,7 +52,8 @@ public class AttendancePage extends AppCompatActivity implements AbsenteesListen
     RecyclerView recyclerView;
     ArrayList<Student> studentArrayList;
     FirebaseFirestore fstore;
-    Button addstudentbtn,proceedbtn;
+    Button proceedbtn;
+    FloatingActionButton addstudentbtn;
     MyStudentAdapter myStudentAdapter;
     String mymessage;
     String registernumber;

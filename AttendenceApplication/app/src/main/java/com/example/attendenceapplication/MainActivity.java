@@ -65,12 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
         textView = findViewById(id.staffnameheader);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(id.toolbar);
 
 
         progressDialog = new ProgressDialog(this);
