@@ -308,11 +308,14 @@ public class AttendancePage extends AppCompatActivity implements AbsenteesListen
     @Override
     public void onQuantityChange(ArrayList<Student> arrayList) {
         absentees.clear();
+        absenteesDetails.clear();
         absentees.addAll(arrayList);
         for(Student s :arrayList){
             System.out.println(s.phoneNo);
-
             absenteesDetails.put(s.studentName,s.phoneNo);
+            System.out.println(absenteesDetails);
+
+
 
         }
     }
