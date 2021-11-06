@@ -30,6 +30,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Classes> classesArrayList;
 
+    FirebaseUser currentUser;
     MyAdapter myAdapter;
     Button logout;
     FirebaseFirestore fstore;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     Menu menu;
     TextView textView;
+    FirebaseAuth firebaseAuth;
 
 
     @Override
@@ -71,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(id.staffnameheader);
 
         toolbar = findViewById(id.toolbar);
+
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+
 
 
         progressDialog = new ProgressDialog(this);
@@ -117,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void EventChangeListener() {
-        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userid = firebaseAuth.getCurrentUser().getUid();
         fstore.collection("users").document(userid).collection("classes").orderBy("departmentName", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override

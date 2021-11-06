@@ -175,6 +175,7 @@ public class AttendancePage extends AppCompatActivity implements AbsenteesListen
     private void sendMessage(String studentName,String phoneNo) {
         int n1 = absenteesPhoneNumbers.size(),n2 = studentArrayList.size();
         String message = "Your ward " + studentName + " is absent for the class.";
+        phoneNo = phoneNo.trim();
         if(!message.equals("") && !phoneNo.equals("")){
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo,null,message,null,null);
@@ -313,9 +314,7 @@ public class AttendancePage extends AppCompatActivity implements AbsenteesListen
         for(Student s :arrayList){
             System.out.println(s.phoneNo);
             absenteesDetails.put(s.studentName,s.phoneNo);
-            System.out.println(absenteesDetails);
-
-
+           // System.out.println(absenteesDetails);
 
         }
     }
